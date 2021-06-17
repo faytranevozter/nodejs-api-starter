@@ -4,6 +4,8 @@ const router = new Router()
 // sample
 router.use('/auth', require('./auth').routes())
 
+router.use('/user', require('./user').routes())
+
 // sample with middleware
 // router.use('/profile', middleware, require('./role').routes())
 
