@@ -6,6 +6,7 @@ const Helmet = require('koa-helmet')
 const Cors = require('@koa/cors')
 const Respond = require('koa-respond')
 const morgan = require('koa-morgan')
+const Sentry = require('@sentry/node')
 
 // Middlewares
 const Middlewares = require('./middlewares')
@@ -52,19 +53,31 @@ router.get('/', (ctx) => {
   }
 })
 
-// endpoint from routes
-router.use('/api', require('./routes/api').routes())
+// route is manageable from routes directory
+router.use('', require('./routes/api').routes())
 
 // Router Middleware - that wrap rules to entire routing protocol
 app.use(router.routes()).use(router.allowedMethods())
 
-// error handling via event emitter. Still figuring out the best way to populate all errors
+// sentry
+Sentry.init({
+  environment: process.env.NODE_ENV || 'prod',
+  release: '1.0.0'
+})
+
+// error handling
 app.on('error', (err, ctx) => {
-  const errorCode = (err.error && err.error.code) ? err.error.code : 500
-  console.error(err)
-  ctx.send(errorCode, {
-    status: errorCode,
-    message: err.message || 'Error occurred.',
+  // sentry
+  Sentry.withScope(function (scope) {
+    scope.addEventProcessor(function (event) {
+      return Sentry.Handlers.parseRequest(event, ctx.request)
+    })
+    Sentry.captureException(err)
+  })
+
+  ctx.send(500, {
+    status: 500,
+    message: 'Something went wrong',
     validation: {},
     data: {}
   })
