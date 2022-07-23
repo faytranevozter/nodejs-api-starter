@@ -45,6 +45,8 @@ app.use(Middlewares.responseTime)
 // Declare Routes
 const router = new KoaRouter()
 
+require('./repositories')(app.context)
+
 // default route
 router.get('/', (ctx) => {
   ctx.type = 'json'

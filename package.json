@@ -15,22 +15,21 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@koa/cors": "^3.1.0",
-    "@sentry/node": "^6.13.3",
-    "dotenv": "^8.2.0",
-    "koa": "^2.13.0",
-    "koa-body": "^4.2.0",
+    "@koa/cors": "^3.3.0",
+    "@sentry/node": "^7.7.0",
+    "dotenv": "^16.0.1",
+    "koa": "^2.13.4",
+    "koa-body": "^5.0.0",
     "koa-bodyparser": "^4.3.0",
-    "koa-helmet": "^6.0.0",
+    "koa-helmet": "^6.1.0",
     "koa-morgan": "^1.0.1",
     "koa-respond": "^2.1.0",
-    "koa-router": "^10.0.0",
-    "mongodb": "^3.6.9"
+    "koa-router": "^12.0.0",
+    "mongodb": "^4.8.0"
   },
   "devDependencies": {
-    "eslint": "^7.16.0",
-    "nodemon": "^2.0.6",
+    "nodemon": "^2.0.19",
     "snazzy": "^9.0.0",
-    "standard": "^16.0.3"
+    "standard": "^17.0.0"
   }
 }

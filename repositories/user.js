@@ -1,18 +1,20 @@
-const { mongoDB } = require('../services/mongo')
-const collectionName = 'users'
+module.exports = class UserRepo {
+  #mongo
+  #collectionName = 'users'
 
-const getUser = async (email) => {
-  try {
-    const res = (await mongoDB()).collection(collectionName).findOne({
-      email: email
-    })
-    return res
-  } catch (err) {
-    console.error('Error getUser :', err)
-    return false
+  constructor (mongo) {
+    this.#mongo = mongo
   }
-}
 
-module.exports = {
-  getUser
+  async getUserByEmail (email) {
+    try {
+      const res = this.#mongo.collection(this.#collectionName).findOne({
+        email
+      })
+      return res
+    } catch (err) {
+      console.error('Error getUser :', err)
+      return false
+    }
+  }
 }

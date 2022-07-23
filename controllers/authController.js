@@ -1,6 +1,6 @@
 const { successResponse } = require('../helpers/response')
 
-const login = async (ctx, next) => {
+const login = async (ctx) => {
   try {
     return ctx.ok(
       successResponse({

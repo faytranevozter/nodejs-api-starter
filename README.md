@@ -8,6 +8,7 @@ This repository talks about how to build an outstanding web server using latest 
   -- Node.js
   -- Koa.js (Express.js Godfather) 🔥🔥
   -- Morgan (for logging purposes)
+  -- Mongodb 💾
 ```
 
 ### **`Project Structures 🏢`**
@@ -15,7 +16,6 @@ This repository talks about how to build an outstanding web server using latest 
 .
 │── README.md
 │── .env.example  (this will be the environment file)
-|── .eslintrc (code standard)
 |── .gitignore
 |── package.json
 |── index.js     (entry point)
@@ -26,6 +26,8 @@ This repository talks about how to build an outstanding web server using latest 
 └── libraries/
 |   └── ...[.js]
 └── middlewares/
+|   └── ...[.js]
+└── repositories/
 |   └── ...[.js]
 └── routes/
 |   └── ...[.js]

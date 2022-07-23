@@ -1,12 +1,12 @@
 const { MongoClient } = require('mongodb')
 
-const mongoDB = async () => {
+module.exports = async () => {
   // Connection URL
   const url = process.env.MONGO_URL || 'mongodb://localhost:27017'
   const db = process.env.MONGO_DATABASE || 'node_starter'
 
   const client = new MongoClient(url, {
-    poolSize: 10,
+    maxPoolSize: 10,
     useUnifiedTopology: true,
     useNewUrlParser: true
   })
@@ -18,8 +18,4 @@ const mongoDB = async () => {
   } catch (err) {
     console.error(err.stack)
   }
-}
-
-module.exports = {
-  mongoDB
 }
