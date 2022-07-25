@@ -35,7 +35,11 @@ app.use(
   BodyParser({
     enableTypes: ['json'],
     jsonLimit: '5mb',
-    strict: true
+    strict: true,
+    onerror: (_err, ctx) => {
+      ctx.status = 422
+      ctx.throw(_err.message, 422)
+    }
   })
 )
 
@@ -77,12 +81,13 @@ app.on('error', (err, ctx) => {
     Sentry.captureException(err)
   })
 
-  ctx.send(500, {
-    status: 500,
-    message: 'Something went wrong',
+  ctx.status = ctx.status === 404 ? 500 : ctx.status
+  ctx.body = {
+    status: ctx.status,
+    message: err.message ?? 'Something went wrong',
     validation: {},
     data: {}
-  })
+  }
 })
 
 if (process.env.NODE_ENV === 'test') {
