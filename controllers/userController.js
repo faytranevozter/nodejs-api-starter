@@ -1,15 +1,7 @@
 const { successResponse, errorResponse } = require('../helpers/response')
-// eslint-disable-next-line no-unused-vars
-const UserRepo = require('../repositories/user')
 
 /**
- * @typedef ContextProp
- * @type {object}
- * @property {UserRepo} userRepo
- */
-
-/**
- * @param {ContextProp} ctx
+ * @param {import('../index').AppContext} ctx
  */
 const detail = async (ctx) => {
   try {
@@ -22,7 +14,7 @@ const detail = async (ctx) => {
     }
 
     // get from repository
-    const user = await ctx.userRepo.getUserByEmail(query.email)
+    const user = await ctx.repo.user.getUserByEmail(query.email)
     if (user) {
       return ctx.ok(
         successResponse(user)

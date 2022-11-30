@@ -14,6 +14,10 @@ const Middlewares = require('./middlewares')
 // initialiaze KOA
 const app = new Koa()
 
+/**
+ * @typedef {import('koa').BaseContext & import('./repositories').ContextRepo} AppContext
+ */
+
 // middleware for handling error
 app.use(Middlewares.middlewareErrorWrapper)
 if (['dev', 'development'].includes(process.env.NODE_ENV)) {
@@ -90,11 +94,7 @@ app.on('error', (err, ctx) => {
   }
 })
 
-if (process.env.NODE_ENV === 'test') {
-  module.exports = app.listen()
-} else {
-  const port = process.env.PORT || 3000
-  app.listen(port, () =>
-    console.log('Service started on port ' + port)
-  )
-}
+const port = process.env.PORT || 3000
+app.listen(port, () =>
+  console.log('Service started on port ' + port)
+)
