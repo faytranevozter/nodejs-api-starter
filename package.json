@@ -16,7 +16,6 @@
   "license": "MIT",
   "dependencies": {
     "@koa/cors": "^3.3.0",
-    "@sentry/node": "^7.7.0",
     "dotenv": "^16.0.1",
     "koa": "^2.13.4",
     "koa-body": "^5.0.0",

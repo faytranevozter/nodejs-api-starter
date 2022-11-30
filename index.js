@@ -6,7 +6,6 @@ const Helmet = require('koa-helmet')
 const Cors = require('@koa/cors')
 const Respond = require('koa-respond')
 const morgan = require('koa-morgan')
-const Sentry = require('@sentry/node')
 
 // Middlewares
 const Middlewares = require('./middlewares')
@@ -69,22 +68,8 @@ router.use('', require('./routes/api').routes())
 // Router Middleware - that wrap rules to entire routing protocol
 app.use(router.routes()).use(router.allowedMethods())
 
-// sentry
-Sentry.init({
-  environment: process.env.NODE_ENV || 'prod',
-  release: '1.0.0'
-})
-
 // error handling
 app.on('error', (err, ctx) => {
-  // sentry
-  Sentry.withScope(function (scope) {
-    scope.addEventProcessor(function (event) {
-      return Sentry.Handlers.parseRequest(event, ctx.request)
-    })
-    Sentry.captureException(err)
-  })
-
   ctx.status = ctx.status === 404 ? 500 : ctx.status
   ctx.body = {
     status: ctx.status,
