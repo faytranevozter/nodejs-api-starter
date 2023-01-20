@@ -2,8 +2,7 @@ const { MongoClient } = require('mongodb')
 
 module.exports = async () => {
   // Connection URL
-  const url = process.env.MONGO_URL || 'mongodb://localhost:27017'
-  const db = process.env.MONGO_DATABASE || 'node_starter'
+  const url = process.env.MONGO_URI || 'mongodb://localhost:27017/dbname'
 
   const client = new MongoClient(url, {
     maxPoolSize: 10,
@@ -14,7 +13,7 @@ module.exports = async () => {
   try {
     // Use connect method to connect to the Server
     await client.connect()
-    return client.db(db)
+    return client.db()
   } catch (err) {
     console.error(err.stack)
   }

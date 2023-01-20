@@ -3,6 +3,12 @@
 ### **`About this repository 😎`**
 This repository talks about how to build an outstanding web server using latest Javascript technologies that can help micro entrepreneurs swiftly reach economic freedom.
 
+### **`Engine Requirement 🚜`**
+```
+  -- Node.js v16.x or v18.x
+  -- NPM v8+
+```
+
 ### **`Technology Stacks 🍔`**
 ```
   -- Node.js
