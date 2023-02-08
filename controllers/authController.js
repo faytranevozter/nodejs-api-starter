@@ -1,5 +1,8 @@
 const { successResponse } = require('../helpers/response')
 
+/**
+ * @param {import('../index').AppContext} ctx
+ */
 const login = async (ctx) => {
   try {
     return ctx.ok(
