@@ -1,4 +1,7 @@
-const mongo = require('../services/mongo')
+const mongoService = require('../services/mongo')
+// const mysqlService = require('../services/mysql')
+
+// const util = require('util')
 const UserRepo = require('./user')
 
 /**
@@ -13,10 +16,15 @@ const UserRepo = require('./user')
  * @param {import('koa').BaseContext} appContext
  */
 module.exports = async (appContext = {}) => {
-  // connect db
-  const mongoCon = await mongo()
+  // mongodb
+  const mongoConnDB = await mongoService()
+
+  // mysql
+  // const mysqlConnection = await mysqlService()
+  // promisify mysql query
+  // const query = util.promisify(mysqlConnection.query).bind(mysqlConnection)
 
   appContext.repo = {
-    user: new UserRepo(mongoCon)
+    user: new UserRepo(mongoConnDB)
   }
 }

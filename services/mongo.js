@@ -1,5 +1,9 @@
 const { MongoClient } = require('mongodb')
 
+/**
+ * Connect to mongodb server
+ * @returns {(import('mongodb').Db | null)}
+ */
 module.exports = async () => {
   // Connection URL
   const url = process.env.MONGO_URI || 'mongodb://localhost:27017/dbname'
@@ -16,5 +20,6 @@ module.exports = async () => {
     return client.db()
   } catch (err) {
     console.error(err.stack)
+    return null
   }
 }

@@ -1,7 +1,18 @@
 module.exports = class UserRepo {
+  /**
+   * @type {import('mongodb').Db}
+   */
   #mongo
+
+  /**
+   * @type {String}
+   */
   #collectionName = 'users'
 
+  /**
+   *
+   * @param {import('mongodb').Db} mongo
+   */
   constructor (mongo) {
     this.#mongo = mongo
   }
