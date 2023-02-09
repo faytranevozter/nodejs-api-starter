@@ -1,6 +1,9 @@
 const { errorResponse } = require('../helpers/response')
 
-// Middleware that catch whole error
+/**
+ * Middleware that catch whole error
+ * @param {import('../index').AppContext} ctx
+ */
 const middlewareErrorWrapper = async (ctx, next) => {
   try {
     await next()
@@ -9,16 +12,24 @@ const middlewareErrorWrapper = async (ctx, next) => {
   }
 }
 
-// Check Headers
+/**
+ * Check Content-type must be application/json
+ * Middleware that catch whole error
+ * @param {import('../index').AppContext} ctx
+ */
 const shouldJSON = async (ctx, next) => {
   if (!ctx.is('application/json')) {
-    ctx.throw(errorResponse(400, 'Content-type application/json required'))
+    ctx.badRequest(errorResponse(400, 'Content-type application/json required'))
   } else {
     await next()
   }
 }
 
-// Response Time
+/**
+ * Response Time
+ * Middleware that catch whole error
+ * @param {import('../index').AppContext} ctx
+ */
 const responseTime = async (ctx, next) => {
   const start = Date.now()
   await next()
