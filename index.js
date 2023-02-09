@@ -10,14 +10,15 @@ const morgan = require('koa-morgan')
 // Middlewares
 const Middlewares = require('./middlewares')
 
+/**
+ * App Context
+ * @typedef {import('koa').BaseContext & import('./repositories').ContextRepo} AppContext
+ */
+
+// initialiaze KOA
+const app = new Koa()
+
 ;(async () => {
-  // initialiaze KOA
-  const app = new Koa()
-
-  /**
-   * @typedef {import('koa').BaseContext & import('./repositories').ContextRepo} AppContext
-   */
-
   // middleware for handling error
   app.use(Middlewares.middlewareErrorWrapper)
   if (['dev', 'development'].includes(process.env.NODE_ENV)) {
