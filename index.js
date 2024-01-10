@@ -56,16 +56,9 @@ const app = new Koa()
 
   await require('./repositories')(app.context)
 
-  // default route
-  router.get('/', (ctx) => {
-    ctx.type = 'json'
-    ctx.body = {
-      message: process.env.APP_NAME || 'It works!'
-    }
-  })
-
   // route is manageable from routes directory
-  router.use('', require('./routes/api').routes())
+  router.use('/api', require('./routes/api').routes())
+  router.use('', require('./routes/web').routes())
 
   // Router Middleware - that wrap rules to entire routing protocol
   app.use(router.routes()).use(router.allowedMethods())

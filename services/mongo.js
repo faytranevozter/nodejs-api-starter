@@ -9,9 +9,7 @@ module.exports = async () => {
   const url = process.env.MONGO_URI || 'mongodb://localhost:27017/dbname'
 
   const client = new MongoClient(url, {
-    maxPoolSize: 10,
-    useUnifiedTopology: true,
-    useNewUrlParser: true
+    maxPoolSize: 10
   })
 
   try {

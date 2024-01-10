@@ -1,8 +1,8 @@
-const mongoService = require('../services/mongo')
+// const mongoService = require('../services/mongo')
 // const mysqlService = require('../services/mysql')
 
 // const util = require('util')
-const UserRepo = require('./user')
+// const UserRepo = require('./user')
 
 /**
  * @typedef {Object} ContextRepo
@@ -17,7 +17,7 @@ const UserRepo = require('./user')
  */
 module.exports = async (appContext = {}) => {
   // mongodb
-  const mongoConnDB = await mongoService()
+  // const mongoConnDB = await mongoService()
 
   // mysql
   // const mysqlConnection = await mysqlService()
@@ -25,6 +25,6 @@ module.exports = async (appContext = {}) => {
   // const query = util.promisify(mysqlConnection.query).bind(mysqlConnection)
 
   appContext.repo = {
-    user: new UserRepo(mongoConnDB)
+    // user: new UserRepo(mongoConnDB)
   }
 }
